@@ -68,7 +68,10 @@ def tfidf(X_train, X_test):
   return X_train_tfidf, X_test_tfidf, vectorizer
 
 def modelKnn(n,metric, X_train_tfidf, X_test_tfidf,y_train):
-  knn = KNeighborsClassifier(n_neighbors=n, metric=metric, weights="distance")
+  if metric == "consine":
+    knn = KNeighborsClassifier(n_neighbors=n, metric=metric)
+  else:
+    knn = KNeighborsClassifier(n_neighbors=n, metric=metric, weights="distance")
   knn.fit(X_train_tfidf, y_train)
   y_pred = knn.predict(X_test_tfidf)
   return y_pred, knn
