@@ -126,7 +126,12 @@ def processing(info,input_n,n_metrick):
                 plt.title("Confusion Matrix")
                 plt.savefig("apps/static/assets/images/confusion/cm_"+matrict+str(n)+".png", dpi=240)
             else:
-                perf.append({"n":n,"metric":matrict,"accuracy":accuracy,"report":report,"f1_score":report_f1_score,"precision":report_precision,"recall":report_recall,'mean_cv_accuracy':mean_cv_accuracy,'cv_accuracy_std_dev':cv_accuracy_std_dev})
+                if matrict == "cosine":
+                    perf.append({"n":n,"metric":"cosine similarity","accuracy":accuracy,"report":report,"f1_score":report_f1_score,"precision":report_precision,"recall":report_recall,'mean_cv_accuracy':mean_cv_accuracy,'cv_accuracy_std_dev':cv_accuracy_std_dev})
+                elif matrict == "euclidean":
+                    perf.append({"n":n,"metric":"euclidean distance","accuracy":accuracy,"report":report,"f1_score":report_f1_score,"precision":report_precision,"recall":report_recall,'mean_cv_accuracy':mean_cv_accuracy,'cv_accuracy_std_dev':cv_accuracy_std_dev})
+                else:
+                    perf.append({"n":n,"metric":matrict,"accuracy":accuracy,"report":report,"f1_score":report_f1_score,"precision":report_precision,"recall":report_recall,'mean_cv_accuracy':mean_cv_accuracy,'cv_accuracy_std_dev':cv_accuracy_std_dev})
     return perf
 
 # def predict(new_text):
